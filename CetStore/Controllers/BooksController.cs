@@ -9,39 +9,29 @@ namespace CetStore.Controllers
 {
     public class BooksController : Controller
     {
-        List<Book> books = new List<Book>();
-        public BooksController()
+        CetStoreContext cetStoreContext;
+
+        public BooksController(CetStoreContext context)
         {
-            Book book1 = new Book();
-            book1.Id = 1;
-            book1.Name = "CET 301";
-            book1.Price = 99.99M;
-            books.Add(book1);
-            Book book2 = new Book();
-            book2.Id = 2;
-            book2.Name = "C# ve Veritabanı";
-            book2.Price = 199.99M;
-            books.Add(book2);
+            cetStoreContext = context;
 
         }
         public IActionResult Index()
         {
+            var books = cetStoreContext.Books.ToList();
             return View(books);
         }
 
         public IActionResult Detay(int id)
         {
-            Book book = new Book();
-            if (id == 1)
+            Book book = cetStoreContext.Books.Where(b => b.Id == id).FirstOrDefault();
+            if (book != null)
             {
-                book = books[0];
-            } else if (id==2) {
-                book = books[1];
+                return View(book);
             } else
             {
                 return NotFound();
             }
-            return View(book);
         }
     }
 }
