@@ -1,11 +1,12 @@
 ﻿@model Book
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
-<form name="BookCreateForm" asp-action="Create">
+<h1>Edit</h1>
+<form name="BookCreateForm" asp-action="Edit">
     <div class="form-group">
+        <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <label asp-for="Name" class="control-label"></label>
@@ -14,7 +15,7 @@
     </div>
     <div class="form-group">
 
-        <label asp-for="Description" class="control-label"></label>       
+        <label asp-for="Description" class="control-label"></label>
         <input asp-for="Description" class="form-control" />
     </div>
     <div class="form-group">
@@ -24,7 +25,7 @@
         <input asp-for="Price" class="form-control" />
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Kayıt Et</button>
+        <button type="submit" class="btn btn-primary">Düzenle</button>
     </div>
 
 </form>

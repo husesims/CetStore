@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CetStore.Models;
 
 namespace CetStore.Models
 {
@@ -13,5 +14,6 @@ namespace CetStore.Models
 
         }
        public DbSet<Book> Books { get; set; }
+       public DbSet<CetStore.Models.Category> Category { get; set; }
     }
 }

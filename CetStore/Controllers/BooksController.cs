@@ -25,11 +25,60 @@ namespace CetStore.Controllers
         [HttpPost]
         public IActionResult Create(Book book)
         {
-            cetStoreContext.Books.Add(book);
-            cetStoreContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                cetStoreContext.Books.Add(book);
+                cetStoreContext.SaveChanges();
+                return RedirectToAction("Index");
+            } else
+            {
+                return View(book);
+            }
         }
+        public IActionResult Edit (int? id)
+        {
+            if(!id.HasValue)
+            {
+                return BadRequest();
+            }
+            var book = cetStoreContext.Books.Find(id);
+            if(book==null)
+            {
+                return NotFound();
+            }
 
+            return View(book);
+
+            
+        }
+        [HttpPost]
+        public IActionResult Edit(int? id, Book book)
+        {
+
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+          
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            if(id!=book.Id)
+            {
+                return BadRequest();
+            }
+            if (ModelState.IsValid)
+            {
+                cetStoreContext.Books.Update(book);
+                cetStoreContext.SaveChanges();
+                return RedirectToAction("Index");
+            } else
+            {
+                return View(book);
+            }
+        }
         public IActionResult Detay(int id)
         {
             
